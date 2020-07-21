@@ -82,11 +82,48 @@ public class Main {
         System.out.printf("23 层次遍历二叉树");
         printBinaryTreeByStage(treeNode1);
         System.out.println();
+        System.out.printf("24 判断序列是否可能为二叉搜索树后续遍历的结果");
+        System.out.println(verifyPostOrderOfBST(new int[]{1, 6, 10, 12, 9, 17, 25, 18, 16}));
     }
 
-    //24.
+    //25. 找到二叉树中路径和为某一整数的所有序列
+    public static List<List<Integer>> findAllPathSumN(TreeNode node, int target, List<List<Integer>> result, List<Integer> path){
+        if(node==null) return result;
+        path.add(node.getVal());
+        target -= node.getVal();
+        // 这里的路径指的是一定要到叶节点
+        if(target==0&&node.getLeft()==null&&node.getRight()==null){
+            result.add(new ArrayList<>(path));
+        }
+        if(target>0){
+            findAllPathSumN(node.getLeft(), target, result, path);
+            findAllPathSumN(node.getRight(), target, result, path);
+        }
+        // 左边进行完，要将左边的末尾节点 进行回退
+        path.remove(path.size() - 1);
+        return result;
+    }
 
-    //TODO 20200622 完成编程题到49题
+    //24. BST数据结构特点
+    public static boolean verifyPostOrderOfBST(int[] sequence){
+        if(sequence == null||sequence.length == 0) return false;
+        // sequence==2的情况都有可能的
+        if(sequence.length==1 || sequence.length==2) return true;
+        int root = sequence[sequence.length - 1];
+        int index = -1;
+        // 条件语句需要特别注意
+        for (int i = sequence.length-2; i >= 0; i--) {
+            if(sequence[i] < root){
+                index = i;
+                break;
+            }
+        }
+        for (int i = 0; i < index ; i++) {
+            if(sequence[i] >= root) return false;
+        }
+        return verifyPostOrderOfBST(Arrays.copyOfRange(sequence, 0, index+1))&& verifyPostOrderOfBST(Arrays.copyOfRange(sequence, index+1, sequence.length-1));
+    }
+
     //23. 层次遍历二叉树
     public static void printBinaryTreeByStage(TreeNode node){
         if(node==null) return;
