@@ -8,7 +8,7 @@ import java.util.List;
  * @author maxiaolong
  * created at 2020/7/18
  */
-public class Solution {
+public class Package {
     public static void main(String[] args) {
         int w = 4;
         int[] c = new int[]{2, 1, 3};

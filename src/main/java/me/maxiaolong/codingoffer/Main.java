@@ -86,6 +86,8 @@ public class Main {
         System.out.println(verifyPostOrderOfBST(new int[]{1, 6, 10, 12, 9, 17, 25, 18, 16}));
     }
 
+    //26.
+
     //25. 找到二叉树中路径和为某一整数的所有序列
     public static List<List<Integer>> findAllPathSumN(TreeNode node, int target, List<List<Integer>> result, List<Integer> path){
         if(node==null) return result;
@@ -709,5 +711,45 @@ class Singleton {
 
     public static Singleton getInstance2() {
         return SingletonHolder.instance; // 达到延迟加载；利用类加载进行实例化时，只会使用单线程
+    }
+}
+
+class RandomListNode{
+    private int value;
+    private RandomListNode next;
+    private RandomListNode randomNext;
+
+    RandomListNode(int value, RandomListNode next, RandomListNode randomNext){
+        this.value = value;
+        this.next = next;
+        this.randomNext = randomNext;
+    }
+
+    RandomListNode(int value){
+        this(value, null, null);
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public RandomListNode getNext() {
+        return next;
+    }
+
+    public void setNext(RandomListNode next) {
+        this.next = next;
+    }
+
+    public RandomListNode getRandomNext() {
+        return randomNext;
+    }
+
+    public void setRandomNext(RandomListNode randomNext) {
+        this.randomNext = randomNext;
     }
 }
